@@ -11,14 +11,14 @@ export default function CheckoutButton() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ amount: 500 }), // Amount in cents (e.g., $5.00)
+      body: JSON.stringify({ amount: 500 }), // cents again idk why
     });
 
     const data = await res.json();
     setLoading(false);
 
     if (data.url) {
-      window.location.href = data.url; // Redirect to Stripe Checkout
+      window.location.href = data.url; // send em back to stripe checkout
     }
   };
 
