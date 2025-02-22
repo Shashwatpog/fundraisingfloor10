@@ -5,7 +5,7 @@ const DonationSchema = new Schema(
     name: { type: String, required: true },
     amount: { type: Number, required: true },
     message: { type: String, required: false },
-    paymentIntentId: { type: String, required: true }, // Track Stripe PaymentIntent ID
+    paymentIntentId: { type: String, required: true }, // track Stripe PaymentIntent ID for leaderboard ig
   },
   { timestamps: true }
 );

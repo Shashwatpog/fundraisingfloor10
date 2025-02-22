@@ -23,7 +23,7 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ amount: Number(amount) * 100 }), // Convert to cents
+      body: JSON.stringify({ amount: Number(amount) * 100 }), // make this shit cents
     });
 
     const data = await res.json();
@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4 text-center">Make a Donation</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center">Make a Dono gang</h1>
         <form onSubmit={handleCheckout} className="flex flex-col gap-4">
           <input
             type="text"

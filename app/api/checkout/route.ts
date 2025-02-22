@@ -22,7 +22,7 @@ export async function POST(req: Request) {
       mode: "payment",
       success_url: `${process.env.NEXT_PUBLIC_DOMAIN}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_DOMAIN}/`,
-      metadata: { name, message }, // Store metadata to retrieve later
+      metadata: { name, message }, 
     });
 
     return NextResponse.json({ url: session.url });
