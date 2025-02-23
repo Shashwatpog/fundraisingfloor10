@@ -1,12 +1,37 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Leaderboard from "../components/Leaderboard";
+import ProgressBar from "@/components/ProgressBar";
 
 export default function HomePage() {
   const [donorName, setDonorName] = useState("");
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [currentDonation, setCurrentDonation] = useState(0);
+
+  // goals for fundraiser
+  const donationGoals = [
+    { amount: 100, label: "Face Makeup", current: 100 },
+    { amount: 200, label: "Snowball" },
+    { amount: 300, label: "Dye Hair"},
+    { amount: 450, label: "Shave Head"},
+  ];
+
+  
+  useEffect(() => {
+    const fetchDonations = async () => {
+      try {
+        const res = await fetch("/api/donations");
+        const data = await res.json();
+        setCurrentDonation(data.total);
+      } catch (error) {
+        console.error("Error fetching total donations:", error);
+      }
+    };
+
+    fetchDonations();
+  }, []);
 
   const handleDonate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +45,7 @@ export default function HomePage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         donorName,
-        amount: Number(amount) * 100, 
+        amount: Number(amount) * 100,
         message,
       }),
     });
@@ -35,11 +60,14 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
-      <h1 className="text-3xl font-bold mb-6">Fundraising Site</h1>
-      <form onSubmit={handleDonate} className="flex flex-col gap-4 max-w-md w-full">
+      <h1 className="text-3xl font-bold mb-6">Floor 10 Fundraiser</h1>
+
+      <ProgressBar currentAmount={currentDonation} goals={donationGoals} />
+
+      <form onSubmit={handleDonate} className="flex flex-col gap-4 max-w-md w-full mt-6">
         <input
           type="text"
-          placeholder="Your Name (optional)"
+          placeholder="Your Name"
           value={donorName}
           onChange={(e) => setDonorName(e.target.value)}
           className="border p-2 rounded"
@@ -63,6 +91,7 @@ export default function HomePage() {
           {loading ? "Processing..." : "Donate"}
         </button>
       </form>
+
       <Leaderboard />
     </div>
   );
