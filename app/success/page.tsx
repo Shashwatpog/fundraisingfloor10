@@ -9,6 +9,9 @@ export default function SuccessPage() {
   const [timer, setTimer] = useState(10);
 
   useEffect(() => {
+
+    triggerConfetti()
+    
     const countdown = setInterval(() => {
       setTimer((prevTimer) => prevTimer - 1);
     }, 1000);
@@ -23,7 +26,6 @@ export default function SuccessPage() {
     };
   }, [router]);
 
-  triggerConfetti();
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">

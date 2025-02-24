@@ -94,6 +94,9 @@ const DonationForm: React.FC<DonationFormProps> = ({ onDonate, loading }) => {
             <Button type="submit" disabled={loading} className="w-full">
               {loading ? "Processing..." : "Donate"}
             </Button>
+            <div className="text-center text-xs text-gray-500 mt-2">
+              All proceeds go to St. Jude Children's Hospital
+            </div>
           </form>
         </CardContent>
       </Card>
