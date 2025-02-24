@@ -1,74 +1,55 @@
-import React from "react";
+"use client"
+
+import type React from "react"
+import { Card, CardContent } from "@/components/ui/card"
+import { Progress } from "@/components/ui/progress"
 
 interface Goal {
-  amount: number;
-  label: string;
+  amount: number
+  label: string
 }
 
 interface ProgressBarProps {
-  currentAmount: number;
-  goals: Goal[];
+  currentAmount: number
+  goals: Goal[]
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ currentAmount, goals }) => {
-  const totalGoal = goals[goals.length - 1].amount;
-  const progress = (currentAmount / totalGoal) * 100;
+  const totalGoal = goals[goals.length - 1].amount
+  const progress = Math.min((currentAmount / totalGoal) * 100, 100)
 
   return (
-    <div className="w-full flex flex-col items-center relative">
-      {/* Display Total Raised Amount */}
-      <h2 className="text-xl font-semibold mb-2">
-        Total Raised: <span className="text-green-600">${currentAmount}</span>
-      </h2>
+    <Card className="w-full max-w-md mx-auto">
+      <CardContent className="pt-6">
+        <Progress value={progress} className="w-full h-4" />
 
-      {/* Progress Bar */}
-      <div className="relative w-full h-5 bg-gray-300 rounded-full">
-        <div
-          className="h-5 bg-green-500 rounded-full transition-all duration-500"
-          style={{ width: `${progress}%` }}
-        />
-        
-        {/* Goal Markers on Progress Bar */}
-        {goals.map((goal) => {
-          const position = (goal.amount / totalGoal) * 100; // Position based on goal percentage
-
-          return (
+        <div className="flex justify-between mt-2">
+          {goals.map((goal, index) => (
             <div
               key={goal.amount}
-              className="absolute top-0 flex flex-col items-center transform -translate-x-1/2"
-              style={{ left: `${position}%` }}
+              className="flex flex-col items-center"
+              style={{ left: `${(goal.amount / totalGoal) * 100}%` }}
             >
-              <div className="w-1 h-5 bg-black"></div> {/* Vertical marker */}
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Goal Labels Positioned Below Correctly */}
-      <div className="relative w-full mt-2">
-        {goals.map((goal) => {
-          const position = (goal.amount / totalGoal) * 100;
-
-          return (
-            <div
-              key={goal.amount}
-              className="absolute flex flex-col items-center transform -translate-x-1/2 text-center"
-              style={{ left: `${position}%` }}
-            >
-              <span className="text-lg font-bold">{goal.amount}</span>
+              <span className="text-sm font-bold">${goal.amount}</span>
               <span
-                className={`text-md font-bold ${
-                  currentAmount >= goal.amount ? "text-green-600" : "text-yellow-600"
+                className={`text-xs sm:text-sm ${
+                  currentAmount >= goal.amount ? "text-green-600" : "text-muted-foreground"
                 }`}
               >
                 {goal.label}
               </span>
+              {index < goals.length - 1 && <div className="absolute top-[-24px] w-px h-4 bg-gray-300" />}
             </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
+          ))}
+        </div>
 
-export default ProgressBar;
+        <p className="text-center mt-6 text-base sm:text-lg font-semibold">
+          ${currentAmount.toLocaleString()} raised of ${totalGoal.toLocaleString()} goal
+        </p>
+      </CardContent>
+    </Card>
+  )
+}
+
+export default ProgressBar
+
