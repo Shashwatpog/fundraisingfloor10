@@ -57,17 +57,17 @@ export default function HomePage() {
 
   return (
     <main className="container mx-auto px-4 py-6 sm:py-8">
-      <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8">Floor 10 Fundraiser</h1>
+      <h1 className="text-3xl text-white sm:text-4xl font-bold text-center mb-6 sm:mb-8">Floor 10 Fundraiser</h1>
       <Suspense  fallback={<div>Loading progress...</div>}>
         <ProgressBar currentAmount={currentDonation} goals={donationGoals} />
       </Suspense>
       <div className="mt-6 sm:mt-8 space-y-6 sm:space-y-8">
         <div>
-          <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Make a Donation</h2>
+          <h2 className="text-xl text-white sm:text-2xl font-semibold mb-3 sm:mb-4">Make a Donation 🙏</h2>
           <DonationForm onDonate={handleDonate} loading={loading} />
         </div>
         <div>
-          <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Top Donors</h2>
+          <h2 className="text-xl text-white sm:text-2xl font-semibold mb-3 sm:mb-4">Donation Leaderboard 🏆</h2>
           <Suspense fallback={<div>Loading Leaderboard...</div>}>
             <Leaderboard />
           </Suspense>
