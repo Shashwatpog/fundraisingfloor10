@@ -12,7 +12,7 @@ export default function HomePage() {
     { amount: 100, label: "Face Makeup" },
     { amount: 200, label: "Snowball" },
     { amount: 300, label: "Dye Hair" },
-    { amount: 450, label: "Shave Head" },
+    { amount: 400, label: "Shave Head" },
   ];
 
   useEffect(() => {

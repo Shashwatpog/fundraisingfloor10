@@ -6,7 +6,7 @@ import Donation from "../../../models/Donations";
 export async function GET(req: Request) {
   await connectToDB();
   try {
-    const donations = await Donation.find().sort({ amount: -1 }).limit(10);
+    const donations = await Donation.find().sort({ amount: -1 }).limit(1000);
     return NextResponse.json(donations);
   } catch (error) {
     console.error("Error fetching leaderboard:", error);
