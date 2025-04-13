@@ -6,6 +6,8 @@ This platform was built for Floor 10 of Siddall Hall at the University of Cincin
 
 As a Resident Advisor at the University of Cincinnati, this was a small effort from my side to give back to the community :D
 
+Check it out here -> [https://fundraisingfloor10.vercel.app](https://fundraisingfloor10.vercel.app/)
+
 ---
 
 ## 🚀 Features implemented
